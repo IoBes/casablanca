@@ -50,7 +50,7 @@ device.startActivity(package + '/' + activity)
 print "- Sleep 2"
 MonkeyRunner.sleep(5)
 
-adbproc = subprocess.Popen([ adb, "-e", "logcat", "System.err:W", "*:S" ], shell=False,
+adbproc = subprocess.Popen([ adb, "-e", "logcat", "UnitTestpp:W", "*:S" ], shell=False,
                            stdout=subprocess.PIPE,
                            stderr=subprocess.STDOUT,
                            stdin=subprocess.PIPE,

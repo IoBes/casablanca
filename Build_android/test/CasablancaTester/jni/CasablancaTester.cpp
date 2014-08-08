@@ -11,24 +11,9 @@
 #include <android/log.h>
 
 JavaVM* JVM = nullptr;
-jobject obj;
-jclass clazz;
-jmethodID post_result;
-
-extern std::function<void(std::string)> _logfunction_cb;
-
 void printLn(const std::string& s) {
-    JNIEnv* env;
-    JVM->AttachCurrentThread(&env, nullptr);
-
-    jstring st = env->NewStringUTF(s.c_str());
-    env->CallVoidMethod(obj, post_result, st);
-
-    env->DeleteLocalRef(st);
+    __android_log_print(ANDROID_LOG_WARN, "UnitTestpp", "%s", s.c_str());
 }
-
-std::mutex failures_lock;
-std::vector<std::string> failures;
 
 struct MyTestReporter : UnitTest::TestReporter {
     UNITTEST_LINKAGE virtual void ReportTestStart(UnitTest::TestDetails const& test) {
@@ -165,14 +150,6 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 }
 
 JNIEXPORT int JNICALL Java_com_example_casablancatester_TestListActivity_bar(JNIEnv* env, jobject l_obj) {
-    obj = env->NewGlobalRef(l_obj);
-    env->DeleteLocalRef(l_obj);
-
-    auto l_clazz = env->GetObjectClass(obj);
-    clazz = (jclass)env->NewGlobalRef(l_clazz);
-    env->DeleteLocalRef(l_clazz);
-
-    post_result = env->GetMethodID(clazz, "callback", "(Ljava/lang/String;)V");
 
     RunTests();
 
