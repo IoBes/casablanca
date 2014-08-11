@@ -41,13 +41,13 @@ if not res:
 
 # Runs the component
 
-print "- Sleep 2"
+print "- Sleep 5"
 MonkeyRunner.sleep(5)
 
 print "- Starting package"
 device.startActivity(package + '/' + activity)
 
-print "- Sleep 2"
+print "- Sleep 5"
 MonkeyRunner.sleep(5)
 
 adbproc = subprocess.Popen([ adb, "-e", "logcat", "UnitTestpp:W", "*:S" ], shell=False,
@@ -57,15 +57,18 @@ adbproc = subprocess.Popen([ adb, "-e", "logcat", "UnitTestpp:W", "*:S" ], shell
                            bufsize=0)
 adbproc.stdin.close()
 
+start_msg_re = re.compile(r"""Start\.\n""")
+
 a = re.compile(r"""Tests complete""")
 
 line = adbproc.stdout.readline()
 while line:
-    print line[:-1]
+    if not start_msg_re.search(line):
+        print line[:-1]
     if a.search(line):
         break
     line = adbproc.stdout.readline()
 
 print "- Testing complete"
 
-adbproc.kill()
+adbproc.stdout.close()
