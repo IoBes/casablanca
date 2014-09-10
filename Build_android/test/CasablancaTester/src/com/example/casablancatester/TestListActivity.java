@@ -106,7 +106,7 @@ public class TestListActivity extends FragmentActivity
     	System.loadLibrary("pplx_test");
     	System.loadLibrary("httpclient_test");
     	System.loadLibrary("httplistener_test");
-    	System.loadLibrary("asyncop_test");
+    	System.loadLibrary("streams_test");
     	System.loadLibrary("utils_test");
     	System.loadLibrary("uri_test");
     	System.loadLibrary("websocketclient_test");
