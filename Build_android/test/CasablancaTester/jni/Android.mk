@@ -65,8 +65,8 @@ include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := asyncop_test
-LOCAL_SRC_FILES := libasyncop_test.so
+LOCAL_MODULE := streams_test
+LOCAL_SRC_FILES := libstreams_test.so
 
 include $(PREBUILT_SHARED_LIBRARY)
 
