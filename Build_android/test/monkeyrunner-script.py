@@ -59,16 +59,20 @@ adbproc.stdin.close()
 
 start_msg_re = re.compile(r"""Start\.\n""")
 
-a = re.compile(r"""Tests complete""")
+a = re.compile(r"""Tests complete\. Total: \d+, Failed: (\d+),""")
+m = None
 
 line = adbproc.stdout.readline()
 while line:
     if not start_msg_re.search(line):
         print line[:-1]
-    if a.search(line):
+    m = a.search(line)
+    if m:
         break
     line = adbproc.stdout.readline()
 
-print "- Testing complete"
+print "- Testing complete. Failed:", m.group(1)
 
 adbproc.stdout.close()
+
+sys.exit(int(m.group(1)))
