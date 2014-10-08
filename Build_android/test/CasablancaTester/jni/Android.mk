@@ -103,7 +103,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := CasablancaTester
 LOCAL_SRC_FILES := CasablancaTester.cpp
 LOCAL_CPPFLAGS += -I ${LOCAL_PATH}/../../../../Release/include
-LOCAL_CPPFLAGS += -I ${LOCAL_PATH}/../../../../Release/tests/Common/UnitTestpp
+LOCAL_CPPFLAGS += -I ${LOCAL_PATH}/../../../../Release/tests/common/UnitTestpp
 LOCAL_CPPFLAGS += -I ${LOCAL_PATH}/../../../build/Boost-for-Android/build/include/boost-1_55
 #LOCAL_CPPFLAGS += -I D:/casablanca.git-tfs/casablanca/packages/boost.1.55.0.16/lib/native/include
 LOCAL_CPPFLAGS += -fexceptions -frtti
