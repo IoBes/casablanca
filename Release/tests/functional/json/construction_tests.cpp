@@ -253,6 +253,10 @@ TEST(object_construction)
 
 TEST(object_construction_keep_order)
 {
+#if (defined(_MSC_VER) && (_MSC_VER >= 1800))
+    VERIFY_ARE_EQUAL(true, false);
+#endif
+
     std::vector<std::pair<string_t, json::value>> f;
     f.push_back(std::make_pair(U("x"), json::value(0)));
     f.push_back(std::make_pair(U("a"), json::value(1)));
